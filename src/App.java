@@ -6,16 +6,16 @@ public class App {
 
         final byte MonthsInYear = 12;
         final byte Percent = 100;
-        double principal = 0;
-        double monthlyInterest = 0;
-        double payments = 0;
-        double numberOfPayments = 0;
+        float principal = 0;
+        float monthlyInterest = 0;
+        float payments = 0;
+        float numberOfPayments = 0;
 
         try (Scanner scanner = new Scanner(System.in)) {
 
             while (true) {
                 System.out.print("Principal ($1k - $1m): ");
-                principal = scanner.nextDouble();
+                principal = scanner.nextFloat();
                 if (principal >= 1_000 && principal <= 1_000_000) 
                     break;
                 System.out.println("Enter a number between 1,000 and 1,000,000.");
@@ -23,7 +23,7 @@ public class App {
 
             while (true) {
                 System.out.print("Interest Rate: ");
-                double interest = scanner.nextDouble();
+                float interest = scanner.nextFloat();
                 if (interest >= 1 && interest <= 30) {
                     monthlyInterest = interest / Percent / MonthsInYear;
                     break;
@@ -33,14 +33,14 @@ public class App {
 
             while (true) {
                 System.out.print("Period (Years): ");
-                payments = scanner.nextDouble();
+                payments = scanner.nextFloat();
                 if (payments >= 1 && payments <= 30){
                     numberOfPayments = payments * MonthsInYear;
                     break;
                 }
                 System.out.println("Enter a value between 1 and 30");
             }
-            
+
             double MonthlyPayments = (principal * ((monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments)) / ((Math.pow(1 + monthlyInterest, numberOfPayments)) - 1)));
             NumberFormat currency = NumberFormat.getCurrencyInstance();
             String result = currency.format(MonthlyPayments);
